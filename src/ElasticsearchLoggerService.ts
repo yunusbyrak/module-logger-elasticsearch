@@ -82,15 +82,13 @@ export class ElasticsearchLoggerService {
         const result = await this.client.index({
 
             index: indice,
-            body: {
+            body: Object.assign({}, message, {
 
                 date: new Date(),
                 hostname: os.hostname(),
                 level,
-                body: message
 
-            }
-
+            })
         });
 
         if (this.options.stdout) {
