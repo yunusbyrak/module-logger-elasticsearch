@@ -158,43 +158,4 @@ export class ElasticsearchLoggerService {
 
     }
 
-    public async getLatest(index?: string) {
-
-        if (!!!index) {
-
-            index = `${ this.options.indexPrefix }*`;
-
-        }
-
-        return this.client.search({
-
-            index,
-            body: {
-
-                sort: [
-
-                    {
-
-                        "date": {
-
-                            "order": "desc"
-
-                        }
-
-                    }
-
-                ]
-
-            }
-
-        });
-
-    }
-
-    public async search<TResponse = Record<string, any>, TRequestBody extends RequestBody = Record<string, any>, TContext = Context>(obj: Search): Promise<TransportRequestPromise<ApiResponse<TResponse, TContext>>> {
-
-        return this.client.search(obj);
-
-    }
-
 }
